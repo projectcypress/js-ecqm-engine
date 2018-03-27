@@ -196,9 +196,9 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-cqm-models@projecttacoma/cqm-models:
-  version "0.0.1"
-  resolved "https://codeload.github.com/projecttacoma/cqm-models/tar.gz/f80bf552acc66ee20603fa058ec6bba54fea7470"
+cqm-models@projecttacoma/cqm-models#measure_model:
+  version "0.3.0"
+  resolved "https://codeload.github.com/projecttacoma/cqm-models/tar.gz/e50e20dafbf7dca77472017731a22372b75d2964"
   dependencies:
     mongoose "^5.0.7"
 
