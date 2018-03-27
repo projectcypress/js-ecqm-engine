@@ -27,7 +27,7 @@
     "sinon": "^4"
   },
   "dependencies": {
-    "cqm-models": "projecttacoma/cqm-models#measure_model",
+    "cqm-models": "projecttacoma/cqm-models",
     "lodash": "^4.17.5",
     "mongoose": "^5.0.7"
   }
