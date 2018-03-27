@@ -4,6 +4,8 @@ const Mongoose = require('mongoose');
 const Sinon = require('sinon');
 require('sinon-mongoose');
 
+const ObjectId = Mongoose.Types.ObjectId;
+
 describe('A MongoDB Measure Source', () => {
   const connectionInfo = 'mongodb://127.0.0.1:27017/js-ecqme-test';
   const measureSource = new MeasureSource(connectionInfo);
@@ -19,7 +21,7 @@ describe('A MongoDB Measure Source', () => {
     });
 
     it('returns a measure given an ID (as an ObjectId)', () => {
-      Promise.resolve(measureSource.findMeasure(Mongoose.Types.ObjectId('56337c006c5d1c6930000417')))
+      Promise.resolve(measureSource.findMeasure(ObjectId('56337c006c5d1c6930000417')))
         .then(response => expect(response).toBe(mes));
     });
 
@@ -39,7 +41,7 @@ describe('A MongoDB Measure Source', () => {
 
     it('returns a measure given a user ID (as an ObjectId) and an HQMF ID', () => {
       Promise.resolve(measureSource.findMeasureByUser(
-        Mongoose.Types.ObjectId('56337c006c5d1c6930000417'),
+        ObjectId('56337c006c5d1c6930000417'),
         '1234-abcd-1234-abcd'
       )).then(response => expect(response).toBe(mes));
     });
