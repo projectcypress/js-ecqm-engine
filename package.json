@@ -3,6 +3,9 @@
   "version": "0.0.2",
   "description": "",
   "main": "lib/index.js",
+  "engines": {
+    "node": "10.0.x"
+  },
   "scripts": {
     "test": "jasmine",
     "lint": "eslint 'lib/*.js' 'lib/**/*.js' 'spec/*.js' 'spec/**/*.js'"
