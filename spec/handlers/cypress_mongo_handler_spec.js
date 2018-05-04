@@ -37,9 +37,9 @@ describe('A Cypress handler for interacting with MongoDB', () => {
     handler.handleResult(dummyMeasure, { 54321: dummyResult });
     handler.finish();
     expect(handler.individualResultsByMeasureId['12345']['54321']
-      .extended_data.correlation_id).toBe('myCorrelation');
+      .extendedData.correlation_id).toBe('myCorrelation');
     expect(handler.individualResultsByMeasureId['12345']['54321']
-      .extended_data.effective_date).toBe('myDate');
+      .extendedData.effective_date).toBe('myDate');
     expect(handler.finished).toBe(true);
   });
 
