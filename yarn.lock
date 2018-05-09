@@ -223,7 +223,7 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-cql-execution@^1.2.0:
+cql-execution@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/cql-execution/-/cql-execution-1.2.0.tgz#cd6ebd7fa69915931f16a6ef0e5dd68bc47b4e67"
   dependencies:
@@ -231,10 +231,10 @@ cql-execution@^1.2.0:
     ucum "0.0.7"
 
 cqm-models@projecttacoma/cqm-models#results_object:
-  version "0.7.1"
-  resolved "https://codeload.github.com/projecttacoma/cqm-models/tar.gz/546346fe3a07e48c13c7de6ee8b09ccb44724327"
+  version "0.7.4"
+  resolved "https://codeload.github.com/projecttacoma/cqm-models/tar.gz/898e84391a8d54db2df00046daac2682097a43c6"
   dependencies:
-    cql-execution "^1.2.0"
+    cql-execution "1.2.0"
     mongoose "^5.0.7"
 
 cross-spawn@^5.1.0:
@@ -546,10 +546,10 @@ hosted-git-info@^2.1.4:
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.6.0.tgz#23235b29ab230c576aab0d4f13fc046b0b038222"
 
 iconv-lite@^0.4.17:
-  version "0.4.21"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.21.tgz#c47f8733d02171189ebc4a400f3218d348094798"
+  version "0.4.23"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
   dependencies:
-    safer-buffer "^2.1.0"
+    safer-buffer ">= 2.1.2 < 3"
 
 ignore@^3.3.3:
   version "3.3.8"
@@ -710,12 +710,12 @@ lodash@^4.14.0, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
 lolex@^2.2.0, lolex@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/lolex/-/lolex-2.3.2.tgz#85f9450425103bf9e7a60668ea25dc43274ca807"
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/lolex/-/lolex-2.4.1.tgz#960884895837916e8963a54e58edf97c95d3060c"
 
 lru-cache@^4.0.1:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.2.tgz#45234b2e6e2f2b33da125624c4664929a0224c3f"
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
@@ -1057,7 +1057,7 @@ safe-buffer@^5.0.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
-safer-buffer@^2.1.0:
+"safer-buffer@>= 2.1.2 < 3":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
 
