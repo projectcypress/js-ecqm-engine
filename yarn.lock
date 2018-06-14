@@ -230,9 +230,9 @@ cql-execution@1.2.0:
     moment "^2.20.1"
     ucum "0.0.7"
 
-cqm-models@projecttacoma/cqm-models#results_object:
-  version "0.7.4"
-  resolved "https://codeload.github.com/projecttacoma/cqm-models/tar.gz/898e84391a8d54db2df00046daac2682097a43c6"
+cqm-models@projecttacoma/cqm-models#results_object_mongoize:
+  version "0.7.6"
+  resolved "https://codeload.github.com/projecttacoma/cqm-models/tar.gz/b85f92e339ce5adee20ff83a023911fe74455c5c"
   dependencies:
     cql-execution "1.2.0"
     mongoose "^5.0.7"
