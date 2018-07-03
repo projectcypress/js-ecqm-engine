@@ -1,5 +1,10 @@
 const ResultsHelpers = require('../../lib/helpers/results_helpers');
 const cql = require('cqm-models').CQL;
+const getJSONFixture = require('../support/spec_helper.js').getJSONFixture;
+const Mongoose = require('mongoose');
+const QDMPatientSchema = require('cqm-models').PatientSchema;
+const PatientSource = require('../../lib/models/patient_source.js');
+const Calculator = require('../../lib/models/calculator.js');
 
 describe('MeasureHelpers', function() {
   describe('prettyResult', function() {
@@ -45,17 +50,21 @@ describe('MeasureHelpers', function() {
       expect(ResultsHelpers.prettyResult(quantity)).toEqual('Quantity: 5');
     });
 
-    // describe('pretty statement results when requested', function() {
-    //   it('for CMS107 correctly', function() {
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/CQL/CMS107/value_sets.json');
-    //     const measure1 = new Thorax.Models.Measure(getJSONFixture('measures/CMS107v6/CMS107v6.json'), {parse: true});
-    //     const patients1 = new Thorax.Collections.Patients(getJSONFixture('patients/CMS107v6/patients.json'), {parse: true});
+    describe('pretty statement results when requested', function() {
+      it('for CMS107 correctly', function() {
+        const valueSetsByOid = getJSONFixture('measures/CMS107v6/value_sets.json');
+        const measure = getJSONFixture('measures/CMS107v6/CMS107v6.json');
+        const patients = [];
+        patients.push(getJSONFixture('patients/CMS107v6/DENEXPass_CMOduringED.json'));
+        const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+        const qdmPatients = patients.map(patient => new QDMPatient(patient));
+        const qdmPatientsSource = new PatientSource(qdmPatients);
+        const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
+        const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
 
-    //     const patient1 = patients1.findWhere({last: 'DENEXPass', first: 'CMOduringED'});
-    //     const result1 = this.cql_calculator.calculate(measure1.get('populations').first(), patient1, {doPretty: true});
-    //     expect(result1.get('statement_results').TJC_Overall['Encounter with Principal Diagnosis and Age'].pretty).toEqual('[Encounter, Performed: Non-Elective Inpatient Encounter\nSTART: 10/10/2012 9:30 AM\nSTOP: 10/12/2012 12:15 AM\nCODE: SNOMED-CT 32485007]');
-    //     expect(result1.get('statement_results').StrokeEducation.Numerator.pretty).toEqual('UNHIT');
-    //   });
+        expect(result.get('statement_results').TJC_Overall['Encounter with Principal Diagnosis and Age'].pretty).toEqual('[Encounter, Performed: Non-Elective Inpatient Encounter\nSTART: 10/10/2012 9:30 AM\nSTOP: 10/12/2012 12:15 AM\nCODE: SNOMED-CT 32485007]');
+        expect(result.get('statement_results').StrokeEducation.Numerator.pretty).toEqual('UNHIT');
+      });
 
     //   it('for CMS760 correctly', function() {
     //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/special_measures/CMS760/value_sets.json');
@@ -103,7 +112,7 @@ describe('MeasureHelpers', function() {
     //     expect(result5.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('MME: Quantity: 0.13 mg/d');
     //     expect(result5.get('statement_results').OpioidData.DrugIngredients.pretty).toContain('drugName: "72 HR Fentanyl 0.075 MG/HR Transdermal System"');
     //   });
-    // });
+    });
 
     // describe('no pretty statement results when not requested', () =>
     //   it('for CMS107 correctly', function() {
