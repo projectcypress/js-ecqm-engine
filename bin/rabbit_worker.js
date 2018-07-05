@@ -136,7 +136,10 @@ operation.attempt(() => {
                 console.log(`Calculated ${JSON.stringify(result)}`);
                 ch.sendToQueue(
                   msg.properties.replyTo,
-                  Buffer.from(JSON.stringify(result)),
+                  Buffer.from(JSON.stringify({
+                    status: 'success',
+                    result,
+                  })),
                   { correlationId: msg.properties.correlationId }
                 );
                 ch.ack(msg);
@@ -144,6 +147,14 @@ operation.attempt(() => {
               // Failure handler
               (result) => {
                 console.error(result);
+                ch.sendToQueue(
+                  msg.properties.replyTo,
+                  Buffer.from(JSON.stringify({
+                    status: 'fail',
+                    error: result,
+                  })),
+                  { correlationId: msg.properties.correlationId }
+                );
                 ch.ack(msg);
               }
             );
@@ -154,7 +165,10 @@ operation.attempt(() => {
             console.error(error);
             ch.sendToQueue(
               msg.properties.replyTo,
-              Buffer.from(JSON.stringify('fail')),
+              Buffer.from(JSON.stringify({
+                status: 'fail',
+                error,
+              })),
               { correlationId: msg.properties.correlationId }
             );
           }
