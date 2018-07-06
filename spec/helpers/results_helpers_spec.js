@@ -110,25 +110,25 @@ describe('MeasureHelpers', function() {
         expect(result.get('statement_results').StatinTherapy['In Demographic'].pretty).toEqual('true');
       });
 
-      // it('for CMS460v0 correctly', function() {
-      //   const valueSetsByOid = getJSONFixture('measures/CMS460v0/value_sets.json');
-      //   const measure = getJSONFixture('measures/CMS460v0/CMS460v0.json');
-      //   const patients = [];
-      //   patients.push(getJSONFixture('patients/CMS460v0/Opioid_Test.json'));
-      //   const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
-      //   const qdmPatients = patients.map(patient => new QDMPatient(patient));
-      //   const qdmPatientsSource = new PatientSource(qdmPatients);
-      //   const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
-      //   const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
+      it('for CMS460v0 correctly', function() {
+        const valueSetsByOid = getJSONFixture('measures/CMS460v0/value_sets.json');
+        const measure = getJSONFixture('measures/CMS460v0/CMS460v0.json');
+        const patients = [];
+        patients.push(getJSONFixture('patients/CMS460v0/Opioid_Test.json'));
+        const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+        const qdmPatients = patients.map(patient => new QDMPatient(patient));
+        const qdmPatientsSource = new PatientSource(qdmPatients);
+        const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
+        const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
 
-      //   expect(result.get('statement_results').DayMonthTimings['Months Containing 29 Days'].pretty).toEqual('[1,\n2,\n3,\n4,\n5,\n6,\n7,\n8,\n9,\n10,\n11,\n12,\n13,\n14,\n15,\n16,\n17,\n18,\n19,\n20,\n21,\n22,\n23,\n24,\n25,\n26,\n27,\n28,\n29]');
-      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('05/09/2012 12:00 AM');
-      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('rxNormCode: Code: RxNorm: 1053647');
-      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('conversionFactor: 0.13');
-      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('effectivePeriod: Interval: 05/09/2012 8:00 AM - 12/28/2012 8:15 AM');
-      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('MME: Quantity: 0.13 mg/d');
-      //   expect(result.get('statement_results').OpioidData.DrugIngredients.pretty).toContain('drugName: "72 HR Fentanyl 0.075 MG/HR Transdermal System"');
-      // });
+        expect(result.get('statement_results').DayMonthTimings['Months Containing 29 Days'].pretty).toEqual('[1,\n2,\n3,\n4,\n5,\n6,\n7,\n8,\n9,\n10,\n11,\n12,\n13,\n14,\n15,\n16,\n17,\n18,\n19,\n20,\n21,\n22,\n23,\n24,\n25,\n26,\n27,\n28,\n29]');
+        expect(result.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('05/09/2012 12:00 AM');
+        expect(result.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('rxNormCode: Code: RxNorm: 1053647');
+        expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('conversionFactor: 0.13');
+        expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('effectivePeriod: Interval: 05/09/2012 8:00 AM - 12/28/2012 8:15 AM');
+        expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('rxNormCode: Code: RxNorm: 1053647');
+        expect(result.get('statement_results').OpioidData.DrugIngredients.pretty).toContain('drugName: "72 HR Fentanyl 0.075 MG/HR Transdermal System"');
+      });
     });
 
     describe('no pretty statement results when not requested', () =>

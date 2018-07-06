@@ -187,7 +187,7 @@
           ]
         },
         "negation_code_list_id": "",
-        "coded_entry_id": "5af346c3b848465f42b0acf4",
+        "coded_entry_id": "5b2a7bfeb8484678da8c686c",
         "code_source": "DEFAULT"
       },
       {
@@ -243,7 +243,7 @@
         },
         "fulfillments": null,
         "negation_code_list_id": "",
-        "coded_entry_id": "5af346c3b848465f42b0acf5",
+        "coded_entry_id": "5b2a7bfeb8484678da8c686d",
         "code_source": "DEFAULT"
       },
       {
@@ -273,7 +273,7 @@
     "medical_record_assigner": "Bonnie",
     "description": null,
     "description_category": null,
-    "insurance_providers": "[{\"codes\":{\"SOP\":[\"349\"]},\"description\":null,\"end_time\":null,\"financial_responsibility_type\":{\"code\":\"SELF\",\"codeSystem\":\"HL7 Relationship Code\"},\"health_record_field\":null,\"member_id\":\"1234567890\",\"mood_code\":\"EVN\",\"name\":\"Other\",\"negationInd\":null,\"negationReason\":null,\"oid\":null,\"payer\":{\"name\":\"Other\"},\"reason\":null,\"relationship\":null,\"specifics\":null,\"start_time\":1199145600,\"status_code\":null,\"time\":null,\"type\":\"OT\"}]"
+    "insurance_providers": "[]"
   },
   "familyName": "Test",
   "givenNames": [
