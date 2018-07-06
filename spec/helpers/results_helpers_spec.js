@@ -50,30 +50,35 @@ describe('MeasureHelpers', function() {
       expect(ResultsHelpers.prettyResult(quantity)).toEqual('Quantity: 5');
     });
 
-    // describe('pretty statement results when requested', function() {
-    //   it('for CMS107 correctly', function() {
-    //     const valueSetsByOid = getJSONFixture('measures/CMS107v6/value_sets.json');
-    //     const measure = getJSONFixture('measures/CMS107v6/CMS107v6.json');
-    //     const patients = [];
-    //     patients.push(getJSONFixture('patients/CMS107v6/DENEXPass_CMOduringED.json'));
-    //     const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
-    //     const qdmPatients = patients.map(patient => new QDMPatient(patient));
-    //     const qdmPatientsSource = new PatientSource(qdmPatients);
-    //     const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
-    //     const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
+    describe('pretty statement results when requested', function() {
+      it('for CMS107 correctly', function() {
+        const valueSetsByOid = getJSONFixture('measures/CMS107v6/value_sets.json');
+        const measure = getJSONFixture('measures/CMS107v6/CMS107v6.json');
+        const patients = [];
+        patients.push(getJSONFixture('patients/CMS107v6/DENEXPass_CMOduringED.json'));
+        const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+        const qdmPatients = patients.map(patient => new QDMPatient(patient));
+        const qdmPatientsSource = new PatientSource(qdmPatients);
+        const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
+        const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
 
-    //     expect(result.get('statement_results').TJC_Overall['Encounter with Principal Diagnosis and Age'].pretty).toEqual('[Encounter, Performed: Non-Elective Inpatient Encounter\nSTART: 10/10/2012 9:30 AM\nSTOP: 10/12/2012 12:15 AM\nCODE: SNOMED-CT 32485007]');
-    //     expect(result.get('statement_results').StrokeEducation.Numerator.pretty).toEqual('UNHIT');
-    //   });
+        expect(result.get('statement_results').TJC_Overall['Encounter with Principal Diagnosis and Age'].pretty).toEqual('[Encounter, Performed: Non-Elective Inpatient Encounter\nSTART: 10/10/2012 9:30 AM\nSTOP: 10/12/2012 12:15 AM\nCODE: SNOMED-CT 32485007]');
+        expect(result.get('statement_results').StrokeEducation.Numerator.pretty).toEqual('UNHIT');
+      });
 
-    //   it('for CMS760 correctly', function() {
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/special_measures/CMS760/value_sets.json');
-    //     const measure2 = new Thorax.Models.Measure(getJSONFixture('measure_data/special_measures/CMS760/CMS760v0.json'), {parse: true});
-    //     const patients2 = new Thorax.Collections.Patients(getJSONFixture('records/special_measures/CMS760/patients.json'), {parse: true});
-    //     const patient2 = patients2.models[0];
-    //     const result2 = this.cql_calculator.calculate(measure2.get('populations').first(), patient2, {doPretty: true});
-    //     expect(result2.get('statement_results').PD0329.IntervalWithTZOffsets.pretty).toEqual('Interval: 08/01/2012 12:00 AM - 12/31/2012 12:00 AM');
-    //   });
+      it('for CMS760 correctly', function() {
+        const valueSetsByOid = getJSONFixture('measures/CMS760v0/value_sets.json');
+        const measure = getJSONFixture('measures/CMS760v0/CMS760v0.json');
+        const patients = [];
+        patients.push(getJSONFixture('patients/CMS760v0/Correct_Timezone.json'));
+        const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+        const qdmPatients = patients.map(patient => new QDMPatient(patient));
+        const qdmPatientsSource = new PatientSource(qdmPatients);
+        const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
+        const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
+
+        expect(result.get('statement_results').PD0329.IntervalWithTZOffsets.pretty).toEqual('Interval: 08/01/2012 12:00 AM - 12/31/2012 12:00 AM');
+      });
 
     //   it('for CMS32 correctly', function() {
     //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/CQL/CMS32/value_sets.json');
@@ -112,7 +117,7 @@ describe('MeasureHelpers', function() {
     //     expect(result5.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('MME: Quantity: 0.13 mg/d');
     //     expect(result5.get('statement_results').OpioidData.DrugIngredients.pretty).toContain('drugName: "72 HR Fentanyl 0.075 MG/HR Transdermal System"');
     //   });
-    // });
+    });
 
     // describe('no pretty statement results when not requested', () =>
     //   it('for CMS107 correctly', function() {

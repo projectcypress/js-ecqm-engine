@@ -61,22 +61,22 @@ describe('Calculator', function() {
     });
   });
 
-  // describe('execution engine using passed in timezone offset', function() {
-  //   it('is correct', function() {
-  //     const valueSetsByOid = getJSONFixture('measures/CMS760v0/value_sets.json');
-  //     const measure = getJSONFixture('measures/CMS760v0/CMS760v0.json');
-  //     const patients = [];
-  //     patients.push(getJSONFixture('patients/CMS760v0/Correct_Timezone.json'));
-  //     const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
-  //     const qdmPatients = patients.map(patient => new QDMPatient(patient));
-  //     const qdmPatientsSource = new PatientSource(qdmPatients);
-  //     const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid);
-  //     const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
+  describe('execution engine using passed in timezone offset', function() {
+    it('is correct', function() {
+      const valueSetsByOid = getJSONFixture('measures/CMS760v0/value_sets.json');
+      const measure = getJSONFixture('measures/CMS760v0/CMS760v0.json');
+      const patients = [];
+      patients.push(getJSONFixture('patients/CMS760v0/Correct_Timezone.json'));
+      const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+      const qdmPatients = patients.map(patient => new QDMPatient(patient));
+      const qdmPatientsSource = new PatientSource(qdmPatients);
+      const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid);
+      const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
 
-  //     // The IPP should fail
-  //     expect(result.IPP).toEqual(0);
-  //   });
-  // });
+      // The IPP should fail
+      expect(result.IPP).toEqual(0);
+    });
+  });
 
   it('multiple population measure correctly', function() {
     const valueSetsByOid = getJSONFixture('measures/CMS160v6/value_sets.json');
