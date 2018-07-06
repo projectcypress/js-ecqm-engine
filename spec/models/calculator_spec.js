@@ -151,4 +151,47 @@ describe('Calculator', function() {
     expect(passNumerResults['PopulationCriteria1'].DENOM).toBe(1);
     expect(passNumerResults['PopulationCriteria1'].NUMER).toBe(1);
   });
+  
+  it('single population patient-based measure correctly', function() {
+    const valueSetsByOid = getJSONFixture('measures/CMS134v6/value_sets.json');
+    const measure = getJSONFixture('measures/CMS134v6/CMS134v6.json');
+    const failHospiceNotPerformedDenex = getJSONFixture('patients/CMS134v6/Fail_Hospice_Not_Performed_Denex.json');
+    const passNumer = getJSONFixture('patients/CMS134v6/Pass_Numer.json');
+    const patients = [];
+    patients.push(failHospiceNotPerformedDenex);
+    patients.push(passNumer);
+    QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+    qdmPatients = patients.map(patient => new QDMPatient(patient));
+    qdmPatientsSource = new PatientSource(qdmPatients);
+    calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid);
+    failHospiceNotPerformedDenexResults = calculationResults[Object.keys(calculationResults)[0]];
+    passNumerResults = calculationResults[Object.keys(calculationResults)[1]];
+
+    expect(failHospiceNotPerformedDenexResults['PopulationCriteria1'].IPP).toBe(1);
+    expect(failHospiceNotPerformedDenexResults['PopulationCriteria1'].DENOM).toBe(1);
+    expect(failHospiceNotPerformedDenexResults['PopulationCriteria1'].DENEX).toBe(0);
+    expect(failHospiceNotPerformedDenexResults['PopulationCriteria1'].NUMER).toBe(0);
+
+    expect(passNumerResults['PopulationCriteria1'].IPP).toBe(1);
+    expect(passNumerResults['PopulationCriteria1'].DENOM).toBe(1);
+    expect(passNumerResults['PopulationCriteria1'].DENEX).toBe(0);
+    expect(passNumerResults['PopulationCriteria1'].NUMER).toBe(1);
+  });
+
+  it('measure that calculates supplemental data elements correctly', function() {
+    const valueSetsByOid = getJSONFixture('measures/CMS529v0/value_sets.json');
+    const measure = getJSONFixture('measures/CMS529v0/CMS529v0.json');
+    const passIppDenomNumer = getJSONFixture('patients/CMS529v0/Pass_IPP-DENOM-NUMER.json');
+    const patients = [];
+    patients.push(passIppDenomNumer);
+    QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+    qdmPatients = patients.map(patient => new QDMPatient(patient));
+    qdmPatientsSource = new PatientSource(qdmPatients);
+    calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid);
+    passIppDenomNumerResults = calculationResults[Object.keys(calculationResults)[0]];
+
+    expect(passIppDenomNumerResults['PopulationCriteria1'].IPP).toBe(1);
+    expect(passIppDenomNumerResults['PopulationCriteria1'].DENOM).toBe(1);
+    expect(passIppDenomNumerResults['PopulationCriteria1'].NUMER).toBe(1);
+  });
 });
