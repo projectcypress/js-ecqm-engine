@@ -23,12 +23,14 @@
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0",
     "jasmine": "^2.9.0",
-    "sinon-mongoose": "^2.1.1",
-    "sinon": "^4"
+    "require-directory": "^2.1.1",
+    "sinon": "^4",
+    "sinon-mongoose": "^2.1.1"
   },
   "dependencies": {
-    "cqm-models": "projecttacoma/cqm-models",
+    "cqm-models": "projecttacoma/cqm-models#temp_results",
     "lodash": "^4.17.5",
+    "moment": "^2.21.0",
     "mongoose": "^5.0.7"
   }
 }
