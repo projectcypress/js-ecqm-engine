@@ -51,7 +51,7 @@ describe('MeasureHelpers', function() {
     });
 
     describe('pretty statement results when requested', function() {
-      it('for CMS107 correctly', function() {
+      it('for CMS107v6 correctly', function() {
         const valueSetsByOid = getJSONFixture('measures/CMS107v6/value_sets.json');
         const measure = getJSONFixture('measures/CMS107v6/CMS107v6.json');
         const patients = [];
@@ -66,7 +66,7 @@ describe('MeasureHelpers', function() {
         expect(result.get('statement_results').StrokeEducation.Numerator.pretty).toEqual('UNHIT');
       });
 
-      it('for CMS760 correctly', function() {
+      it('for CMS760v0 correctly', function() {
         const valueSetsByOid = getJSONFixture('measures/CMS760v0/value_sets.json');
         const measure = getJSONFixture('measures/CMS760v0/CMS760v0.json');
         const patients = [];
@@ -80,56 +80,73 @@ describe('MeasureHelpers', function() {
         expect(result.get('statement_results').PD0329.IntervalWithTZOffsets.pretty).toEqual('Interval: 08/01/2012 12:00 AM - 12/31/2012 12:00 AM');
       });
 
-    //   it('for CMS32 correctly', function() {
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/CQL/CMS32/value_sets.json');
-    //     const measure3 = new Thorax.Models.Measure(getJSONFixture('measure_data/CQL/CMS32/CMS721v0.json'), {parse: true});
-    //     const patients3 = new Thorax.Collections.Patients(getJSONFixture('records/CQL/CMS32/patients.json'), {parse: true});
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/CQL/CMS32/value_sets.json');
-    //     const patient3 = patients3.models[0];
-    //     const result3 = this.cql_calculator.calculate(measure3.get('populations').first(), patient3, {doPretty: true});
-    //     expect(result3.get('statement_results').Test32['Measure Observation'].pretty).toEqual('FUNCTION');
-    //     expect(result3.get('statement_results').Test32['ED Visit'].pretty).toEqual('[Encounter, Performed: Emergency department patient visit (procedure)\nSTART: 11/22/2012 8:00 AM\nSTOP: 11/22/2012 8:15 AM\nCODE: SNOMED-CT 4525004]');
-    //     expect(result3.get('statement_results').Test32['Measure Population Exclusions'].pretty).toEqual('FALSE ([])');
-    //   });
+      it('for CMS721v0 correctly', function() {
+        const valueSetsByOid = getJSONFixture('measures/CMS721v0/value_sets.json');
+        const measure = getJSONFixture('measures/CMS721v0/CMS721v0.json');
+        const patients = [];
+        patients.push(getJSONFixture('patients/CMS721v0/Visit_1ED.json'));
+        const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+        const qdmPatients = patients.map(patient => new QDMPatient(patient));
+        const qdmPatientsSource = new PatientSource(qdmPatients);
+        const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
+        const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
 
-    //   it('for CMS347 correctly', function() {
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/CQL/CMS347/value_sets.json');
-    //     const measure4 = new Thorax.Models.Measure(getJSONFixture('measure_data/CQL/CMS347/CMS735v0.json'), {parse: true});
-    //     const patients4 = new Thorax.Collections.Patients(getJSONFixture('records/CQL/CMS347/patients.json'), {parse: true});
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/CQL/CMS347/value_sets.json');
-    //     const patient4 = patients4.models[0];
-    //     const result4 = this.cql_calculator.calculate(measure4.get('populations').first(), patient4, {doPretty: true});
-    //     expect(result4.get('statement_results').StatinTherapy['In Demographic'].pretty).toEqual('true');
-    //   });
+        expect(result.get('statement_results').Test32['Measure Observation'].pretty).toEqual('FUNCTION');
+        expect(result.get('statement_results').Test32['ED Visit'].pretty).toEqual('[Encounter, Performed: Emergency department patient visit (procedure)\nSTART: 11/22/2012 8:00 AM\nSTOP: 11/22/2012 8:15 AM\nCODE: SNOMED-CT 4525004]');
+        expect(result.get('statement_results').Test32['Measure Population Exclusions'].pretty).toEqual('FALSE ([])');
+      });
 
-    //   it('for CMS460 correctly', function() {
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/special_measures/CMS460/value_sets.json');
-    //     const measure5 = new Thorax.Models.Measure(getJSONFixture('measure_data/special_measures/CMS460/CMS460v0.json'), {parse: true});
-    //     const patients5 = new Thorax.Collections.Patients(getJSONFixture('records/special_measures/CMS460/patients.json'), {parse: true});
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/special_measures/CMS460/value_sets.json');
-    //     const patient5 = patients5.models[0];
-    //     const result5 = this.cql_calculator.calculate(measure5.get('populations').first(), patient5, {doPretty: true});
-    //     expect(result5.get('statement_results').DayMonthTimings['Months Containing 29 Days'].pretty).toEqual('[1,\n2,\n3,\n4,\n5,\n6,\n7,\n8,\n9,\n10,\n11,\n12,\n13,\n14,\n15,\n16,\n17,\n18,\n19,\n20,\n21,\n22,\n23,\n24,\n25,\n26,\n27,\n28,\n29]');
-    //     expect(result5.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('05/09/2012 12:00 AM');
-    //     expect(result5.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('rxNormCode: Code: RxNorm: 1053647');
-    //     expect(result5.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('conversionFactor: 0.13');
-    //     expect(result5.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('effectivePeriod: Interval: 05/09/2012 8:00 AM - 12/28/2012 8:15 AM');
-    //     expect(result5.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('MME: Quantity: 0.13 mg/d');
-    //     expect(result5.get('statement_results').OpioidData.DrugIngredients.pretty).toContain('drugName: "72 HR Fentanyl 0.075 MG/HR Transdermal System"');
-    //   });
+      it('for CMS735v0 correctly', function() {
+        const valueSetsByOid = getJSONFixture('measures/CMS735v0/value_sets.json');
+        const measure = getJSONFixture('measures/CMS735v0/CMS735v0.json');
+        const patients = [];
+        patients.push(getJSONFixture('patients/CMS735v0/first_last.json'));
+        const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+        const qdmPatients = patients.map(patient => new QDMPatient(patient));
+        const qdmPatientsSource = new PatientSource(qdmPatients);
+        const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
+        const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
+
+        expect(result.get('statement_results').StatinTherapy['In Demographic'].pretty).toEqual('true');
+      });
+
+      // it('for CMS460v0 correctly', function() {
+      //   const valueSetsByOid = getJSONFixture('measures/CMS460v0/value_sets.json');
+      //   const measure = getJSONFixture('measures/CMS460v0/CMS460v0.json');
+      //   const patients = [];
+      //   patients.push(getJSONFixture('patients/CMS460v0/Opioid_Test.json'));
+      //   const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+      //   const qdmPatients = patients.map(patient => new QDMPatient(patient));
+      //   const qdmPatientsSource = new PatientSource(qdmPatients);
+      //   const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid, {doPretty: true});
+      //   const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
+
+      //   expect(result.get('statement_results').DayMonthTimings['Months Containing 29 Days'].pretty).toEqual('[1,\n2,\n3,\n4,\n5,\n6,\n7,\n8,\n9,\n10,\n11,\n12,\n13,\n14,\n15,\n16,\n17,\n18,\n19,\n20,\n21,\n22,\n23,\n24,\n25,\n26,\n27,\n28,\n29]');
+      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('05/09/2012 12:00 AM');
+      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescription Days'].pretty).toContain('rxNormCode: Code: RxNorm: 1053647');
+      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('conversionFactor: 0.13');
+      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('effectivePeriod: Interval: 05/09/2012 8:00 AM - 12/28/2012 8:15 AM');
+      //   expect(result.get('statement_results').PotentialOpioidOveruse['Prescriptions with MME'].pretty).toContain('MME: Quantity: 0.13 mg/d');
+      //   expect(result.get('statement_results').OpioidData.DrugIngredients.pretty).toContain('drugName: "72 HR Fentanyl 0.075 MG/HR Transdermal System"');
+      // });
     });
 
-    // describe('no pretty statement results when not requested', () =>
-    //   it('for CMS107 correctly', function() {
-    //     bonnie.valueSetsByOid = getJSONFixture('/measure_data/CQL/CMS107/value_sets.json');
-    //     const measure1 = new Thorax.Models.Measure(getJSONFixture('measure_data/CQL/CMS107/CMS107v6.json'), {parse: true});
-    //     const patients1 = new Thorax.Collections.Patients(getJSONFixture('records/CQL/CMS107/patients.json'), {parse: true});
-    //     const patient1 = patients1.findWhere({last: 'DENEXPass', first: 'CMOduringED'});
-    //     const result1 = this.cql_calculator.calculate(measure1.get('populations').first(), patient1);
-    //     expect(result1.get('statement_results').TJC_Overall['Encounter with Principal Diagnosis and Age'].pretty).toEqual(undefined);
-    //     expect(result1.get('statement_results').StrokeEducation.Numerator.pretty).toEqual(undefined);
-    //   })
-    // );
+    describe('no pretty statement results when not requested', () =>
+      it('for CMS107 correctly', function() {
+        const valueSetsByOid = getJSONFixture('measures/CMS107v6/value_sets.json');
+        const measure = getJSONFixture('measures/CMS107v6/CMS107v6.json');
+        const patients = [];
+        patients.push(getJSONFixture('patients/CMS107v6/DENEXPass_CMOduringED.json'));
+        const QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+        const qdmPatients = patients.map(patient => new QDMPatient(patient));
+        const qdmPatientsSource = new PatientSource(qdmPatients);
+        const calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid);
+        const result = Object.values(calculationResults[Object.keys(calculationResults)[0]])[0];
+
+        expect(result.get('statement_results').TJC_Overall['Encounter with Principal Diagnosis and Age'].pretty).toEqual(undefined);
+        expect(result.get('statement_results').StrokeEducation.Numerator.pretty).toEqual(undefined);
+      })
+    );
   });
 
   describe('buildPopulationRelevanceMap', function() {
