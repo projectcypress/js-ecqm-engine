@@ -194,4 +194,126 @@ describe('Calculator', function() {
     expect(passIppDenomNumerResults['PopulationCriteria1'].DENOM).toBe(1);
     expect(passIppDenomNumerResults['PopulationCriteria1'].NUMER).toBe(1);
   });
+
+  // it('multiple populations with multiple stratifications measure correctly', function() {
+  //   const valueSetsByOid = getJSONFixture('measures/CMS137v7/value_sets.json');
+  //   const measure = getJSONFixture('measures/CMS137v7/CMS137v7.json');
+  //   const ippPopFail = getJSONFixture('patients/CMS137v7/2YoungDependence&TX_IPPPopFail.json');
+  //   const denexPop18StratPass = getJSONFixture('patients/CMS137v7/Dependency<60daysSB4_DENEXPop>18StratPass.json');
+  //   const pop1_1318Pass = getJSONFixture('patients/CMS137v7/Therapy<14DaysDx_NUMERPop1_13-18Pass.json');
+  //   const patients = [];
+  //   patients.push(ippPopFail);
+  //   patients.push(denexPop18StratPass);
+  //   patients.push(pop1_1318Pass);
+  //   QDMPatient = Mongoose.model('QDMPatient', QDMPatientSchema);
+  //   qdmPatients = patients.map(patient => new QDMPatient(patient));
+  //   qdmPatientsSource = new PatientSource(qdmPatients);
+  //   calculationResults = Calculator.calculate(measure, qdmPatientsSource, valueSetsByOid);
+
+  //   ippPopFailResults = calculationResults[Object.keys(calculationResults)[0]];
+  //   denexPop18StratPassResults = calculationResults[Object.keys(calculationResults)[1]];
+  //   pop1_1318PassResults = calculationResults[Object.keys(calculationResults)[4]];
+
+  //   // Patient ippPopFail results
+  //   expect(ippPopFailResults['PopulationCriteria1'].IPP).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1'].DENOM).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1'].NUMER).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1'].DENEX).toBe(0);
+
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 1'].IPP).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 1'].DENOM).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 1'].NUMER).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 1'].DENEX).toBe(0);
+
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 2'].IPP).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 2'].DENOM).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 2'].NUMER).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria1 - Stratification 2'].DENEX).toBe(0);
+
+  //   expect(ippPopFailResults['PopulationCriteria2'].IPP).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2'].DENOM).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2'].NUMER).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2'].DENEX).toBe(0);
+
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 1'].IPP).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 1'].DENOM).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 1'].NUMER).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 1'].DENEX).toBe(0);
+
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 2'].IPP).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 2'].DENOM).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 2'].NUMER).toBe(0);
+  //   expect(ippPopFailResults['PopulationCriteria2 - Stratification 2'].DENEX).toBe(0);
+
+  //   // Patient denexPop18StratPassResults
+  //   expect(denexPop18StratPassResults['PopulationCriteria1'].IPP).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1'].DENOM).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1'].NUMER).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1'].DENEX).toBe(1);
+
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 1'].IPP).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 1'].DENOM).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 1'].NUMER).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 1'].DENEX).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 1'].STRAT).toBe(0);
+
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 2'].IPP).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 2'].DENOM).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 2'].NUMER).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 2'].DENEX).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria1 - Stratification 2'].STRAT).toBe(1);
+
+  //   expect(denexPop18StratPassResults['PopulationCriteria2'].IPP).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2'].DENOM).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2'].NUMER).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2'].DENEX).toBe(1);
+
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 1'].IPP).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 1'].DENOM).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 1'].NUMER).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 1'].DENEX).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 1'].STRAT).toBe(0);
+
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 2'].IPP).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 2'].DENOM).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 2'].NUMER).toBe(0);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 2'].DENEX).toBe(1);
+  //   expect(denexPop18StratPassResults['PopulationCriteria2 - Stratification 2'].STRAT).toBe(1);
+
+
+  //   // Patient pop1_1318PassResults
+  //   expect(pop1_1318PassResults['PopulationCriteria1'].IPP).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria1'].DENOM).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria1'].NUMER).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria1'].DENEX).toBe(0);
+
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 1'].IPP).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 1'].DENOM).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 1'].NUMER).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 1'].DENEX).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 1'].STRAT).toBe(1);
+
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 2'].IPP).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 2'].DENOM).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 2'].NUMER).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 2'].DENEX).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 2'].STRAT).toBe(0);
+
+  //   expect(pop1_1318PassResults['PopulationCriteria2'].IPP).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria2'].DENOM).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria2'].NUMER).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria2'].DENEX).toBe(0);
+
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 1'].IPP).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 1'].DENOM).toBe(1);
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 1'].NUMER).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 1'].DENEX).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria1 - Stratification 1'].STRAT).toBe(1);
+
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 2'].IPP).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 2'].DENOM).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 2'].NUMER).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 2'].DENEX).toBe(0);
+  //   expect(pop1_1318PassResults['PopulationCriteria2 - Stratification 2'].STRAT).toBe(0);
+  // });
 });
