@@ -245,9 +245,9 @@ cql-execution@1.2.2:
     moment "^2.20.1"
     ucum "0.0.7"
 
-cqm-models@projecttacoma/cqm-models#master:
-  version "0.8.1"
-  resolved "https://codeload.github.com/projecttacoma/cqm-models/tar.gz/dc6f22bfaa79a395e67bdbd242d69feb080b16f9"
+cqm-models@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/cqm-models/-/cqm-models-0.8.2.tgz#433027e0ee921b981d4cf14d3fa7f960ca68e947"
   dependencies:
     cql-execution "1.2.2"
     mongoose "^5.0.7"
@@ -797,8 +797,8 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
 
 mongoose@^5.0.7:
-  version "5.2.4"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.2.4.tgz#52b3385bee9420cf6bbd7e4ebfb211523c37a9e3"
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.2.5.tgz#4bab4e366cbc161ee4420a1661f9c84c2487a2e9"
   dependencies:
     async "2.6.1"
     bson "~1.0.5"
@@ -1106,8 +1106,8 @@ samsam@1.3.0:
   resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.3.0.tgz#8d1d9350e25622da30de3e44ba692b5221ab7c50"
 
 saslprep@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/saslprep/-/saslprep-1.0.0.tgz#2c4968a0bfbf249530cd597bc62870ccd4b41a24"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/saslprep/-/saslprep-1.0.1.tgz#b644e0ba25b156b652f3cb90df7542f896049ba6"
 
 "semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.3.0:
   version "5.5.0"
