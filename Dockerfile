@@ -8,7 +8,9 @@ COPY . /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN yarn install --only=production
+RUN npm update \
+    && npm install --global yarn \
+    && yarn install --only=production
 
 RUN chmod 755 bin/rabbit_worker.js
 
