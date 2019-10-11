@@ -6,9 +6,8 @@ COPY . /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm install yarn --global
-
-RUN yarn install
+RUN npm install yarn --global \
+    && yarn install
 
 RUN chmod 755 bin/rabbit_worker.js
 
