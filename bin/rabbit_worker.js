@@ -174,7 +174,7 @@ operation.attempt(() => {
           }
           ch.ack(msg);
         }
-      }, { noAck: false });
+      }, { noAck: true });
     });
   });
 });
